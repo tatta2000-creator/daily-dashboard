@@ -875,15 +875,43 @@ canvas{max-width:100%;max-height:100%}
       <td class="group-sep neg">-800</td>
       <td class="neg">-100,0%</td>
     
+      </tr><tr class="branch-row" id="br_ИКЕЛЕ_МИКЕЛЕ" onclick="toggleBranchDetail('ИКЕЛЕ МИКЕЛЕ')">
+      <td><span class="expand-icon">▶</span>ИКЕЛЕ МИКЕЛЕ</td>
+      
+      <td>50&nbsp;755</td>
+      <td class="bar-cell"><div class="data-bar" style="width:0%"></div>114&nbsp;277</td>
+      <td class="group-sep">—</td>
+      <td class="dash">—</td>
+      <td class="dash">—</td>
+      <td class="group-sep">—</td>
+      <td class="dash">—</td>
+      <td class="dash">—</td>
+      <td class="group-sep dash">—</td>
+      <td class="dash">—</td>
+    
+    </tr><tr class="detail-row" data-parent="ИКЕЛЕ МИКЕЛЕ">
+        <td>Кафе</td>
+        
+      <td>50&nbsp;755</td>
+      <td class="bar-cell"><div class="data-bar" style="width:0%"></div>114&nbsp;277</td>
+      <td class="group-sep">—</td>
+      <td class="dash">—</td>
+      <td class="dash">—</td>
+      <td class="group-sep">—</td>
+      <td class="dash">—</td>
+      <td class="dash">—</td>
+      <td class="group-sep dash">—</td>
+      <td class="dash">—</td>
+    
       </tr><tr class="total-row"><td>Всего по компании</td>
-      <td>6&nbsp;098&nbsp;212</td>
-      <td class="bar-cell">131&nbsp;330&nbsp;124</td>
+      <td>6&nbsp;148&nbsp;967</td>
+      <td class="bar-cell">131&nbsp;444&nbsp;401</td>
       <td class="group-sep">131&nbsp;864&nbsp;128</td>
-      <td class="neg">-534&nbsp;004</td>
-      <td class="neg">-0,4%</td>
+      <td class="neg">-419&nbsp;727</td>
+      <td class="neg">-0,3%</td>
       <td class="group-sep">127&nbsp;745&nbsp;605</td>
-      <td class="pos">3&nbsp;584&nbsp;519</td>
-      <td class="pos">2,8%</td>
+      <td class="pos">3&nbsp;698&nbsp;796</td>
+      <td class="pos">2,9%</td>
       <td class="group-sep neg">-13&nbsp;382</td>
       <td class="neg">-0,2%</td>
     </tr><tr class="lfl-row"><td>Всего LfL</td>
@@ -902,17 +930,7 @@ canvas{max-width:100%;max-height:100%}
     </div>
 
     <!-- BRANCH FILTER -->
-    <div id="filterSection">
-      <button class="filter-btn active" data-branch="ALL" onclick="toggleBranchFilter(this)">Все</button>
-      <button class="filter-btn" data-branch="ВДНХ" onclick="toggleBranchFilter(this)">ВДНХ</button>
-      <button class="filter-btn" data-branch="ДВ" onclick="toggleBranchFilter(this)">ДВ</button>
-      <button class="filter-btn" data-branch="ДВ МСК" onclick="toggleBranchFilter(this)">ДВ МСК</button>
-      <button class="filter-btn" data-branch="КАЗАНЬ" onclick="toggleBranchFilter(this)">КАЗАНЬ</button>
-      <button class="filter-btn" data-branch="НН" onclick="toggleBranchFilter(this)">НН</button>
-      <button class="filter-btn" data-branch="СПБ" onclick="toggleBranchFilter(this)">СПБ</button>
-      <button class="filter-btn" data-branch="УФА" onclick="toggleBranchFilter(this)">УФА</button>
-      <button class="filter-btn" data-branch="ЭЙФОРИЯ" onclick="toggleBranchFilter(this)">ЭЙФОРИЯ</button>
-    </div>
+    <div id="filterSection"><button class="filter-btn active" data-branch="ALL">Все</button><button class="filter-btn" data-branch="СПБ">СПБ</button><button class="filter-btn" data-branch="ДВ">ДВ</button><button class="filter-btn" data-branch="ВДНХ">ВДНХ</button><button class="filter-btn" data-branch="КАЗАНЬ">КАЗАНЬ</button><button class="filter-btn" data-branch="ДВ МСК">ДВ МСК</button><button class="filter-btn" data-branch="НН">НН</button><button class="filter-btn" data-branch="ЭЙФОРИЯ">ЭЙФОРИЯ</button><button class="filter-btn" data-branch="УФА">УФА</button><button class="filter-btn" data-branch="ИКЕЛЕ МИКЕЛЕ">ИКЕЛЕ МИКЕЛЕ</button></div>
 
     <!-- PAGE 1 bottom: weekly bars + weekday table -->
     <div id="page1Bottom">
@@ -954,10 +972,10 @@ canvas{max-width:100%;max-height:100%}
     <!-- PAGE 2 bottom: monthly line chart + month table -->
     <div id="page2Bottom">
       <!-- LEFT: Monthly line chart -->
-      <div class="card chart-card" id="monthlyLineCard" style="height: 322px;">
+      <div class="card chart-card" id="monthlyLineCard" style="height: 348px;">
         <div class="section-title" id="monthlyTitle">Динамика по месяцам 2024–2026г — Все филиалы</div>
         <div class="chart-inner">
-          <canvas id="monthlyChart" style="box-sizing: border-box; display: block; height: 278px; width: 737px;" width="1474" height="557"></canvas>
+          <canvas id="monthlyChart" style="box-sizing: border-box; display: block; height: 304px; width: 737px;" width="1474" height="609"></canvas>
         </div>
       </div>
       <!-- RIGHT: Month filter + table -->
@@ -1330,11 +1348,27 @@ canvas{max-width:100%;max-height:100%}
         <td class="pos">35&nbsp;412</td>
         <td class="pos">126,9%</td>
         <td>1,0 %</td>
+      </tr><tr class="branch-row" id="mBr_ИКЕЛЕ_МИКЕЛЕ" onclick="toggleMonthDetail('ИКЕЛЕ МИКЕЛЕ')">
+      <td><span class="expand-icon">▶</span>ИКЕЛЕ МИКЕЛЕ</td>
+      <td class="bar-cell"><div class="data-bar" style="width:0%"></div>114&nbsp;277</td>
+      <td class="dash">—</td>
+      <td class="dash">—</td>
+      <td class="dash">—</td>
+      <td class="dash">—</td>
+      <td></td>
+    </tr><tr class="detail-row" data-mparent="ИКЕЛЕ МИКЕЛЕ">
+        <td>Кафе</td>
+        <td>114&nbsp;277</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+        <td>100,0 %</td>
       </tr><tr class="total-row"><td>Всего по компании</td>
-    <td>861&nbsp;990&nbsp;054</td>
-    <td class="neg">-577&nbsp;128&nbsp;229</td>
+    <td>862&nbsp;104&nbsp;331</td>
+    <td class="neg">-577&nbsp;013&nbsp;952</td>
     <td class="neg">-40,1%</td>
-    <td class="neg">-495&nbsp;755&nbsp;294</td>
+    <td class="neg">-495&nbsp;641&nbsp;017</td>
     <td class="neg">-36,5%</td>
     <td></td>
   </tr><tr class="lfl-row"><td>Всего LfL</td>
@@ -1371,7 +1405,13 @@ let weeklyChartInst = null;
 let monthlyChartInst = null;
 let reportDate = '2026-07-20';
 
-const BRANCHES_ORDER = ['ВДНХ','ДВ','ДВ МСК','КАЗАНЬ','НН','СПБ','УФА','ЭЙФОРИЯ'];
+// BRANCHES_ORDER is computed dynamically from RAW_DATA so new branches are picked up automatically
+function computeBranchesOrder(data) {
+  const rev = {};
+  data.forEach(d => { rev[d.branch] = (rev[d.branch] || 0) + d.revenue; });
+  return Object.keys(rev).sort((a, b) => rev[b] - rev[a]);
+}
+let BRANCHES_ORDER = computeBranchesOrder(RAW_DATA);
 const REV_TYPES_ORDER = ['Билеты оффлайн','Билеты онлайн','Фото','Кафе','Прочая выручка'];
 const MONTHS_ORDER = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 const DAYS_ORDER = ['понедельник','вторник','среда','четверг','пятница','суббота','воскресенье'];
@@ -1639,6 +1679,30 @@ function toggleBranchDetail(branch) {
 }
 
 // ==================== BRANCH FILTER ====================
+function buildBranchFilter() {
+  const fs = document.getElementById('filterSection');
+  if (!fs) return;
+  // Preserve currently selected branches
+  const prev = new Set(selectedBranches);
+  fs.innerHTML = '';
+  // "Все" button
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn' + (prev.size === 0 ? ' active' : '');
+  allBtn.dataset.branch = 'ALL';
+  allBtn.textContent = 'Все';
+  allBtn.onclick = function() { toggleBranchFilter(this); };
+  fs.appendChild(allBtn);
+  // One button per branch
+  BRANCHES_ORDER.forEach(branch => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (prev.has(branch) ? ' active' : '');
+    btn.dataset.branch = branch;
+    btn.textContent = branch;
+    btn.onclick = function() { toggleBranchFilter(this); };
+    fs.appendChild(btn);
+  });
+}
+
 function toggleBranchFilter(btn) {
   const branch = btn.dataset.branch;
   if (branch === 'ALL') {
@@ -2275,12 +2339,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (maxDataDate) {
     const el = document.getElementById('reportDate');
     el.max = maxDataDate;
-    // Also set default value and reportDate to max if current value exceeds it
     if (!el.value || el.value > maxDataDate) {
       el.value = maxDataDate;
       reportDate = maxDataDate;
     }
   }
+  // Build branch filter buttons from RAW_DATA (picks up any new branches automatically)
+  buildBranchFilter();
   initAdminMode();
   updateVisualTitles();
   renderAll();

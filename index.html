@@ -1342,6 +1342,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
 <!-- daily-dashboard-v2-overrides:start -->
 
 <script>window.DAILY_DASHBOARD_MODE="user";
@@ -1353,6 +1355,7 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
 
   const V2_VERSION = "2026-07-29";
   const REPORT_FILE_NAME = "index.html";
+  const WEEKDAY_WEEKS_COUNT = 8;
   const MONTH_SHORT = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"];
   const YEAR_COLORS = ["#4f8ef7", "#8bb9ff", "#c4ccd8"];
   const TEXT_DARK = "#1a1f2e";
@@ -1806,7 +1809,7 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
     data.filter(d => Number(d.year) === current && Number(d.week_num) <= currWeekNum).forEach(d => {
       if (!weekMap[d.week_num]) weekMap[d.week_num] = d.week;
     });
-    const weekNums = Object.keys(weekMap).map(Number).sort((a, b) => b - a).slice(0, 6);
+    const weekNums = Object.keys(weekMap).map(Number).sort((a, b) => b - a).slice(0, WEEKDAY_WEEKS_COUNT);
     const rows = weekNums.map(wn => {
       const daySums = {};
       DAYS_ORDER.forEach(d => { daySums[d] = null; });

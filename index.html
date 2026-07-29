@@ -192,7 +192,7 @@ canvas{max-width:100%;max-height:100%}
       .canvas-tooltip.visible{display:block}
       .static-report-date{color:#fff;font-size:13px;font-family:inherit}
       @media print{html,body{height:auto!important;overflow:visible!important;background:#fff!important}#header{position:static!important}.page{height:auto!important;page-break-after:always}.btn-header,#adminBtns,#fileInput,#modal-overlay,#toast{display:none!important}}
-      @media (max-width: 760px){
+      @media (max-width: 1000px), (max-device-width: 760px), (pointer: coarse) and (max-width: 1100px){
         html,body{height:auto!important;min-height:100%;overflow:auto!important;width:100%!important}
         body{display:block!important;background:var(--bg)}
         #header{height:auto!important;min-height:0!important;padding:8px 10px!important;align-items:flex-start!important;gap:7px;flex-direction:column}
@@ -220,7 +220,7 @@ canvas{max-width:100%;max-height:100%}
         #weeklyChartWrap{overflow-x:auto!important;overflow-y:hidden!important;min-height:310px}
         #monthlyChart{min-height:260px}
       }
-      @media (min-width: 761px){
+      @media (min-width: 1001px) and (pointer: fine), (min-width: 1101px){
         #weeklyChartWrap{overflow-y:auto;overflow-x:hidden}
       }</style><style>#header-title{cursor:default!important}.scoped-filter{display:none!important}</style></head>
 <body>
@@ -1344,6 +1344,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+
 <!-- daily-dashboard-v2-overrides:start -->
 
 <script>window.DAILY_DASHBOARD_MODE="user";
@@ -1356,6 +1360,7 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
   const V2_VERSION = "2026-07-29";
   const REPORT_FILE_NAME = "index.html";
   const WEEKDAY_WEEKS_COUNT = 8;
+  const MOBILE_LAYOUT_QUERY = "(max-width: 1000px), (max-device-width: 760px), (pointer: coarse) and (max-width: 1100px)";
   const MONTH_SHORT = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"];
   const YEAR_COLORS = ["#4f8ef7", "#8bb9ff", "#c4ccd8"];
   const TEXT_DARK = "#1a1f2e";
@@ -1422,6 +1427,10 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
 
   function shortYear(year) {
     return String(year).slice(-2);
+  }
+
+  function isCompactLayout() {
+    return window.matchMedia ? window.matchMedia(MOBILE_LAYOUT_QUERY).matches : window.innerWidth <= 1000;
   }
 
   function analogDate(dateStr, targetYear) {
@@ -1753,9 +1762,10 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
     });
 
     const rowH = 24;
-    const labelW = window.innerWidth <= 760 ? 145 : 230;
+    const compact = isCompactLayout();
+    const labelW = compact ? 145 : 230;
     const valueW = 118;
-    const width = Math.max(wrap.clientWidth - 12, window.innerWidth <= 760 ? 640 : 520);
+    const width = Math.max(wrap.clientWidth - 12, compact ? 640 : 520);
     const height = Math.max(rows.length * rowH + 22, 180);
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
@@ -1845,7 +1855,7 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
     const years = getComparisonYears();
     const rect = canvas.parentElement.getBoundingClientRect();
     const width = Math.max(320, Math.round(rect.width || 600));
-    const height = Math.max(window.innerWidth <= 760 ? 260 : 220, Math.round(rect.height || 220));
+    const height = Math.max(isCompactLayout() ? 260 : 220, Math.round(rect.height || 220));
     canvas.width = width;
     canvas.height = height;
     canvas.style.width = "100%";
@@ -2190,7 +2200,7 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
       .canvas-tooltip.visible{display:block}
       .static-report-date{color:#fff;font-size:13px;font-family:inherit}
       @media print{html,body{height:auto!important;overflow:visible!important;background:#fff!important}#header{position:static!important}.page{height:auto!important;page-break-after:always}.btn-header,#adminBtns,#fileInput,#modal-overlay,#toast{display:none!important}}
-      @media (max-width: 760px){
+      @media ${MOBILE_LAYOUT_QUERY}{
         html,body{height:auto!important;min-height:100%;overflow:auto!important;width:100%!important}
         body{display:block!important;background:var(--bg)}
         #header{height:auto!important;min-height:0!important;padding:8px 10px!important;align-items:flex-start!important;gap:7px;flex-direction:column}
@@ -2218,7 +2228,7 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
         #weeklyChartWrap{overflow-x:auto!important;overflow-y:hidden!important;min-height:310px}
         #monthlyChart{min-height:260px}
       }
-      @media (min-width: 761px){
+      @media (min-width: 1001px) and (pointer: fine), (min-width: 1101px){
         #weeklyChartWrap{overflow-y:auto;overflow-x:hidden}
       }`;
     document.head.appendChild(style);

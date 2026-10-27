@@ -357,7 +357,7 @@ canvas{max-width:100%;max-height:100%}
 <!-- EXPORT MODAL -->
 
 
-<div id="toast" class="">Данные обновлены: 29&nbsp;332 строк, дата 2026-10-27</div>
+<div id="toast"></div>
 
 <script>window.DAILY_DASHBOARD_MODE="user";
 window.DAILY_DASHBOARD_SCOPE_BRANCH="";
@@ -1348,12 +1348,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
 <!-- daily-dashboard-v2-overrides:start -->
 
 <script>window.DAILY_DASHBOARD_MODE="user";
 window.DAILY_DASHBOARD_SCOPE_BRANCH="";
 
-window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
 (function () {
   "use strict";
 
@@ -1369,6 +1369,26 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
 
   let lastValidationStats = null;
   let resizeTimer = null;
+let LFL_REFERENCE = [{"branch":"СПБ СП","code":"spb","start":"2024-01-01"},{"branch":"ВДНХ СП","code":"vdnh","start":"2024-01-01"},{"branch":"ДВ КЗН","code":"dv","start":"2024-01-01"},{"branch":"КАЗАНЬ СП","code":"kazan","start":"2024-01-01"},{"branch":"УФА СП","code":"ufa","start":"2024-01-01"},{"branch":"ДВ МСК","code":"dv-msk","start":"2025-12-14"},{"branch":"ЭЙФОРИЯ","code":"eyforiya","start":"2025-05-01"},{"branch":"ИКЕЛЕ МИКЕЛЕ","code":"ikele-mikele","start":"2026-07-19"},{"branch":"НН СП","code":"nn","start":"2024-01-01"}];
+
+  function parseLflRows(){}
+
+  function calculateLfl(dateStr, previousYear) {
+    if (!previousYear) return { current: 0, previous: null, count: 0 };
+    const end = analogDate(dateStr, previousYear);
+    const monthStart = analogMonthStart(dateStr, previousYear);
+    const result = { current: 0, previous: 0, count: 0 };
+    BRANCHES_ORDER.forEach(branch => {
+      const entry = LFL_REFERENCE.find(r => r.branch === branch);
+      if (!entry || entry.start > end) return;
+      const previousStart = entry.start > monthStart ? entry.start : monthStart;
+      const currentStart = analogDate(previousStart, Number(dateStr.slice(0, 4)));
+      result.current += sumBy({ branch, dateFrom: currentStart, dateTo: dateStr });
+      result.previous += sumBy({ branch, dateFrom: previousStart, dateTo: end });
+      result.count++;
+    });
+    return result;
+  }
 
   function pad2(v) {
     return String(v).padStart(2, "0");
@@ -1660,12 +1680,12 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
     const totalPrevW = sumBy({ dateFrom: weekRanges.prevStart, dateTo: weekRanges.prevEnd });
     html += `<tr class="total-row"><td>Всего по компании</td>${rowCells(totalDay, totalYtd, totalP1, totalP2, totalP1 ? totalYtd - totalP1 : null, pctChange(totalYtd, totalP1), totalP2 ? totalYtd - totalP2 : null, pctChange(totalYtd, totalP2), totalPrevW ? totalCurrW - totalPrevW : null, pctChange(totalCurrW, totalPrevW), true)}</tr>`;
 
-    const lflBranches1 = prev1 ? BRANCHES_ORDER.filter(b => sumBy({ dateFrom: monthStart, dateTo: dateStr, branch: b }) !== 0 && sumBy({ dateFrom: analogMonthStart(dateStr, prev1), dateTo: analogDate(dateStr, prev1), branch: b }) !== 0) : [];
-    const lflBranches2 = prev2 ? BRANCHES_ORDER.filter(b => sumBy({ dateFrom: monthStart, dateTo: dateStr, branch: b }) !== 0 && sumBy({ dateFrom: analogMonthStart(dateStr, prev2), dateTo: analogDate(dateStr, prev2), branch: b }) !== 0) : [];
-    const lflYtd1 = lflBranches1.reduce((s, b) => s + sumBy({ dateFrom: monthStart, dateTo: dateStr, branch: b }), 0);
-    const lflP1 = prev1 ? lflBranches1.reduce((s, b) => s + sumBy({ dateFrom: analogMonthStart(dateStr, prev1), dateTo: analogDate(dateStr, prev1), branch: b }), 0) : null;
-    const lflYtd2 = lflBranches2.reduce((s, b) => s + sumBy({ dateFrom: monthStart, dateTo: dateStr, branch: b }), 0);
-    const lflP2 = prev2 ? lflBranches2.reduce((s, b) => s + sumBy({ dateFrom: analogMonthStart(dateStr, prev2), dateTo: analogDate(dateStr, prev2), branch: b }), 0) : null;
+    const lfl1 = calculateLfl(dateStr, prev1);
+    const lfl2 = calculateLfl(dateStr, prev2);
+    const lflYtd1 = lfl1.current;
+    const lflP1 = lfl1.previous;
+    const lflYtd2 = lfl2.current;
+    const lflP2 = lfl2.previous;
     html += `<tr class="lfl-row"><td>Всего LfL</td>
       <td>—</td><td>${fmt(lflYtd1)}</td>
       <td class="group-sep">${lflP1 ? fmt(lflP1) : "—"}</td>
@@ -2286,7 +2306,6 @@ window.DAILY_DASHBOARD_MODE = window.DAILY_DASHBOARD_MODE || 'admin';
 
   document.addEventListener("DOMContentLoaded", bootstrapV2, { once: true });
 })();
-
 </script>
 <!-- daily-dashboard-v2-overrides:end -->
 
